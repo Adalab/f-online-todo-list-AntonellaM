@@ -15,3 +15,7 @@ body {
 .--active {
     display: block;
 }
+
+.--crossed {
+    text-decoration: line-through;
+}
