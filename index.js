@@ -1,13 +1,15 @@
 'use strict';
 
+console.log('hello')
+
 const dateContainerEl = document.querySelector('.card-header__date');
 const taskContainerEl = document.querySelector('.task-container');
-const addingButtonEl = document.querySelector('.task-adding-section__button');
+const addingButtonEl = document.querySelector('.add__button');
 const taskInputEl = document.querySelector('.add-task-modal__content');
 const addTaskModalEl = document.querySelector('.add-task-modal');
 const addTaskButtonEl = document.querySelector('.add-task-modal__button');
+const transparentEl = document.querySelector('.transparent-layer');
 const taskCheckboxes = [];
-
 let taskCounter = 0;
 setDate();
 
@@ -51,6 +53,8 @@ function createTask(text) {
     taskContainerEl.appendChild(taskItemEl);
 
     toggleClass(addTaskModalEl, '--active');
+    toggleClass(transparentEl, '--active');
+
     taskCheckboxes.forEach(checkbox => {
         console.log(checkbox);
         checkbox.addEventListener('click', handleCheckbox)
@@ -59,6 +63,7 @@ function createTask(text) {
 
 function handlerAddButton() {
     toggleClass(addTaskModalEl, '--active');
+    toggleClass(transparentEl, '--active');
 }
 
 addingButtonEl.addEventListener('click', handlerAddButton);
