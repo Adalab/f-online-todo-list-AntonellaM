@@ -109,6 +109,69 @@ body {
     text-transform: capitalize;
 }
 
+.card-body {
+    height: calc(100% - 175px);
+    padding: 10px 0;
+}
+
+.task-container {
+    padding: 15px 30px;
+    height: 100%;
+}
+
+.task-item {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    margin: 0 0 15px 0;
+}
+
+.task-item input[type = 'checkbox'] {
+    visibility: hidden;
+}
+
+.task__label {
+    cursor: pointer;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 0;
+    left: 0;
+    background: #eee;
+    border:1px solid #14d9c4;
+    border-radius: 50%;
+}
+
+.task__label.--active {
+    border: 1px solid #0aa393;
+}
+
+.task__label.--active::after {
+    opacity: 1;
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 8px;
+    top: 6px;
+    left: 6px;
+    border: 3px solid #0aa393;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+}
+
+.task__title {
+    margin: 4px 0 0 25px;
+    color: #727677;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
 .card-footer {
     height: 80px;
     display: flex;
@@ -126,6 +189,7 @@ body {
     font-size: 50px;
     font-weight: 700;
     border: 2px solid #0aa393;
+    overflow: hidden;
     border-radius: 50%;
     position: relative;
     cursor: pointer;
@@ -135,7 +199,7 @@ body {
     color: #11cbb8;
     position: absolute;
     top: -10px;
-    left: 7px;
+    right: 6px;
 }
 
 .add-task-modal {
@@ -213,6 +277,7 @@ body {
 
 .--crossed {
     text-decoration: line-through;
+    color: lightgrey;
 }
 
 @media all and (min-width: 768px) {
