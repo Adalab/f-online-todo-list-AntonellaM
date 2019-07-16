@@ -6,6 +6,7 @@
 
 body {
     min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
     background-image: linear-gradient(to top, #0aa393, #0cb09f, #0fbeab, #11cbb8, #14d9c4);
 }
 
@@ -20,7 +21,6 @@ body {
     width: 250px;
     background-color: #fff;
     position: relative;
-    padding: 30px;
     border-radius: 4px;
 }
 
@@ -55,6 +55,55 @@ body {
     z-index: -2;
 }
 
+.card-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #0fbeab;
+}
+.card-header__icon {
+    width: 60px;
+    height: 60px;
+    background-image: url('./images/adalab-icon.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.card-header__date {
+    width: 65%;
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    grid-template-rows: 20px 20px;
+    grid-template-areas: "day weekday"
+                         "day month-year";
+}
+
+.day {
+    grid-area: day;
+    font-size: 36px;
+    font-weight: 700;
+    color: #0fbeab;
+    margin: 0 15px;
+}
+
+.weekday {
+    grid-area: weekday;
+    font-size: 14px;
+    font-weight: 700;
+    color: #727677;
+    text-transform: capitalize;
+}
+
+.month-year {
+    grid-area: month-year;
+    font-size: 14px;
+    color: #727677;
+    text-transform: capitalize;
+}
+
 .add-task-modal {
     display: none;
 }
@@ -70,5 +119,9 @@ body {
 @media all and (min-width: 768px) {
     .card-container {
         width: 300px;
+    }
+
+    .card-header__date {
+        width: 60%;
     }
 }

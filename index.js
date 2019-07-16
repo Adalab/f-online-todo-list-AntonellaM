@@ -1,6 +1,6 @@
 'use strict';
 
-const dateContainerEl = document.querySelector('.main-header__date');
+const dateContainerEl = document.querySelector('.card-header__date');
 const taskContainerEl = document.querySelector('.task-container');
 const addingButtonEl = document.querySelector('.task-adding-section__button');
 const taskInputEl = document.querySelector('.add-task-modal__content');
@@ -8,8 +8,26 @@ const addTaskModalEl = document.querySelector('.add-task-modal');
 const addTaskButtonEl = document.querySelector('.add-task-modal__button');
 const taskCheckboxes = [];
 
-dateContainerEl.innerHTML = new Date();
 let taskCounter = 0;
+setDate();
+
+function createElement(element, className, text, parent) {
+    const newElement = document.createElement(element);
+    newElement.classList.add(className);
+    const newText = document.createTextNode(text);
+    newElement.appendChild(newText);
+    parent.appendChild(newElement);
+}
+
+function setDate() {
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const currentDate = new Date().toLocaleDateString('es-ES', options).replace(new RegExp('de ', 'g'), '').replace(',', '');
+    const dateArray = currentDate.split(' ');
+
+    createElement('p', 'weekday', dateArray[0], dateContainerEl);
+    createElement('p', 'day', dateArray[1], dateContainerEl);
+    createElement('p', 'month-year', (dateArray[2] + ', ' + dateArray[3]), dateContainerEl);
+}
 
 function toggleClass(element, className) {
     element.classList.toggle(className);
