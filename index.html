@@ -7,22 +7,24 @@
     <title>Document</title>
     <link rel="stylesheet" href="./style.css">
 </head>
-<body>
-    <header class="main-header">
-        <div class="main-header__icon"></div>
-        <div class="main-header__date"></div>
-    </header>
-    <main>
-        <ul class="task-container"></ul>
-        <div class="add-task-modal">
-            <label for="new-task" class="add-task-modal__label">Nueva tarea</label>
-            <input type="text" id="new-task" class="add-task-modal__content" placeholder="Añade tu tarea">
-            <button class="add-task-modal__button">Añadir</button>
+<body class="page-container">
+    <div class="card-container">
+        <div class="card-header">
+            <div class="card-header__icon"></div>
+            <div class="card-header__date"></div>
         </div>
-        <div class="task-adding-section">
-            <button class="task-adding-section__button">+</button>
+        <div class="card-body">
+            <ul class="task-container"></ul>
+            <div class="add-task-modal">
+                <label for="new-task" class="add-task-modal__label">Nueva tarea</label>
+                <input type="text" id="new-task" class="add-task-modal__content" placeholder="Añade tu tarea">
+                <button class="add-task-modal__button">Añadir</button>
+            </div>
+            <div class="task-adding-section">
+                <button class="task-adding-section__button">+</button>
+            </div>
         </div>
-    </main>
+    </div>
     <script type="text/javascript" src="./index.js"></script>
 </body>
 </html>

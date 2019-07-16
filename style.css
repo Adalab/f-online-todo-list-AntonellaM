@@ -6,6 +6,53 @@
 
 body {
     min-height: 100vh;
+    background-image: linear-gradient(to top, #0aa393, #0cb09f, #0fbeab, #11cbb8, #14d9c4);
+}
+
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-container {
+    height: 500px;
+    width: 250px;
+    background-color: #fff;
+    position: relative;
+    padding: 30px;
+    border-radius: 4px;
+}
+
+.card-container,
+.card-container::before,
+.card-container::after {
+    box-shadow: 0px 4px 5px 3px rgba(98,107,112,0.25);
+}
+
+.card-container::before,
+.card-container::after {
+  content: "";
+  position: absolute;
+  background-color: #eee;
+  border-radius: 4px;
+
+}
+
+.card-container::before {
+    width: calc(100% + 10px);
+    height: calc(100% - 10px);
+    left: -5px;
+    top: 5px;
+    z-index: -1;
+}
+
+.card-container::after {
+    width: calc(100% + 20px);
+    height: calc(100% - 20px);
+    left: -10px;
+    top: 10px;
+    z-index: -2;
 }
 
 .add-task-modal {
@@ -18,4 +65,10 @@ body {
 
 .--crossed {
     text-decoration: line-through;
+}
+
+@media all and (min-width: 768px) {
+    .card-container {
+        width: 300px;
+    }
 }
