@@ -12,21 +12,16 @@ const taskCheckboxes = [];
 let taskCounter = 0;
 let taskList = [];
 setDate();
-getLocalStorage('tasks', taskList);
-// const savedTasks = JSON.parse(localStorage.getItem('tasks'));
-// console.log(savedTasks);
+getLocalStorage('tasks');
 
 function setLocalStorage(name, object) {
     localStorage.setItem(name, JSON.stringify(object));
 }
 
-function getLocalStorage(name, destination) {
+function getLocalStorage(name) {
     const savedTasks = JSON.parse(localStorage.getItem(name));
-    destination = savedTasks;
-    console.log(savedTasks);
-    savedTasks && destination.forEach(element => createTask(element.task, element.checked));
-    toggleClass(addTaskModalEl, '--active');
-    toggleClass(transparentEl, '--active');
+    savedTasks ? taskList = savedTasks : taskList = [];
+    savedTasks && taskList.forEach(element => createTask(element.task, element.checked));
 }
 
 function createElement(element, classNames, text, parent) {
@@ -59,6 +54,7 @@ function createTask(text, state) {
     const checkboxEl = createElement('input')
     checkboxEl.type = 'checkbox';
     checkboxEl.id = `task-${taskCounter}`;
+
     state ? checkboxEl.checked === true : checkboxEl.checked === false;
 
     const labelEl = createElement('label', ['task__label'], null, taskItemEl);
@@ -71,6 +67,11 @@ function createTask(text, state) {
     taskItemEl.appendChild(checkboxEl);
     taskItemEl.appendChild(taskTextEl);
     taskContainerEl.appendChild(taskItemEl);
+
+    if (checkboxEl.checked) {
+        labelEl.classList.add('--active');
+        taskTextEl.classList.add('--crossed');
+    }
 
     toggleClass(addTaskModalEl, '--active');
     toggleClass(transparentEl, '--active');
@@ -95,7 +96,7 @@ addingButtonEl.addEventListener('click', handlerAddButton);
 function handleAddTaskButton() {
     const newTask = taskInputEl.value;
     taskInputEl.value = '';
-    const taskObject = createTask(newTask);
+    const taskObject = createTask(newTask, false);
     taskList.push(taskObject);
     setLocalStorage('tasks', taskList);
 }
@@ -104,8 +105,14 @@ addTaskButtonEl.addEventListener('click', handleAddTaskButton);
 
 function handleCheckbox(event) {
     const taskIdentifier = event.currentTarget.getAttribute('for');
-    document.getElementById(taskIdentifier).checked ? false : true;
-    document.querySelector(`h2[data-id=&{taskIdentifier}]`);
+    const taskChecked = document.getElementById(taskIdentifier).checked ? false : true;
+    const taskSelected = document.querySelector(`h2[data-id=${taskIdentifier}]`).innerHTML;
+    const taskInList = taskList.findIndex(task => task.task.includes(taskSelected));
+    console.log(taskInList);
+    if (taskInList !== -1) {
+        taskList[taskInList].checked = taskChecked;
+        setLocalStorage('tasks', taskList);
+    }
     toggleClass(document.querySelector(`h2[data-id=${taskIdentifier}]`), '--crossed');
     toggleClass(document.querySelector(`label[for=${taskIdentifier}]`), '--active');
 }
