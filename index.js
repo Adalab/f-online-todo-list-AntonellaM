@@ -22,6 +22,8 @@ function getLocalStorage(name) {
     const savedTasks = JSON.parse(localStorage.getItem(name));
     savedTasks ? taskList = savedTasks : taskList = [];
     savedTasks && taskList.forEach(element => createTask(element.task, element.checked));
+    resetClass(addTaskModalEl, '--active');
+    resetClass(transparentEl, '--active');
 }
 
 function createElement(element, classNames, text, parent) {
@@ -47,6 +49,10 @@ function toggleClass(element, className) {
     element.classList.toggle(className);
 }
 
+function resetClass(element, className) {
+    element.classList.remove(className);
+}
+
 function createTask(text, state) {
     taskCounter += 1;
 
@@ -55,7 +61,7 @@ function createTask(text, state) {
     checkboxEl.type = 'checkbox';
     checkboxEl.id = `task-${taskCounter}`;
 
-    state ? checkboxEl.checked === true : checkboxEl.checked === false;
+    state ? checkboxEl.checked = true : checkboxEl.checked = false;
 
     const labelEl = createElement('label', ['task__label'], null, taskItemEl);
     labelEl.setAttribute('for', `task-${taskCounter}`);
@@ -108,7 +114,6 @@ function handleCheckbox(event) {
     const taskChecked = document.getElementById(taskIdentifier).checked ? false : true;
     const taskSelected = document.querySelector(`h2[data-id=${taskIdentifier}]`).innerHTML;
     const taskInList = taskList.findIndex(task => task.task.includes(taskSelected));
-    console.log(taskInList);
     if (taskInList !== -1) {
         taskList[taskInList].checked = taskChecked;
         setLocalStorage('tasks', taskList);
